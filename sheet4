@@ -1,0 +1,48 @@
+data = [10, 501, 22, 37, 100, 999, 87, 351]
+result = filter(lambda x: x > 4, data)
+print(list(result))
+
+
+
+data = [10, 'hello', 22, 'world', 100, 'python']
+
+# Lambda function to check if each element is an integer or a string
+result = list(map(lambda x: f"{x} is a string" if isinstance(x, str) else f"{x} is an integer", data))
+
+# Print the result
+print(result)
+
+
+
+
+from functools import reduce
+
+# Generate Fibonacci series using a lambda function
+fibonacci_series = reduce(lambda acc, _: acc + [acc[-1] + acc[-2]], range(50 - 2), [0, 1])
+
+# Print the first 50 Fibonacci numbers
+print(fibonacci_series)
+
+
+
+import re
+
+def validate_input(input_data, input_type):
+    if input_type == 'email':
+        pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    elif input_type == 'bangladesh_mobile':
+        pattern = r'^(\+8801[3-9]\d{8})$'
+    elif input_type == 'usa_telephone':
+        pattern = r'^\+1\d{10}$'
+    elif input_type == 'password':
+        pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{16}$'
+    else:
+        return False
+    
+    return re.match(pattern, input_data) is not None
+
+# Usage examples
+print(validate_input('example@email.com', 'email'))              # True for valid email
+print(validate_input('+8801712345678', 'bangladesh_mobile'))      # True for valid BD mobile number
+print(validate_input('+12345678901', 'usa_telephone'))           # True for valid USA telephone number
+print(validate_input('A1b2C3d4E5f6G7h8!', 'password'))           # True for valid 16-character password
